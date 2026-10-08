@@ -34,6 +34,11 @@ def main():
     parser.add_argument("--episodes", type=int, default=1, help="Number of episodes to play (default: 1)")
     parser.add_argument("--max-steps", type=int, default=700, help="Max decision steps per episode (default: 700)")
     parser.add_argument("--headless", action="store_true", help="Run without opening the game window")
+    parser.add_argument(
+        "--hold-open",
+        action="store_true",
+        help="Keep the game window open after the final episode until Enter is pressed",
+    )
     parser.add_argument("--model", type=str, default="convaiinnovations/laya", help="Hugging Face model ID")
     parser.add_argument("--device", type=str, default=default_device, help="Device (cuda/cpu/mps)")
     parser.add_argument("--survival", type=float, default=None, help="Engine penalty per HP lost (default: scenario preset)")
@@ -119,6 +124,12 @@ def main():
             print(f"  - Decision Steps      : {step} ({game.get_episode_time()} tics)")
             print(f"  - Avg Inference       : {avg_lat:.2f} ms")
             print("-" * 60 + "\n")
+
+        if args.hold_open and not args.headless:
+            try:
+                input("Session complete. Press Enter to close the Doom window...")
+            except EOFError:
+                pass
     finally:
         game.close()
 

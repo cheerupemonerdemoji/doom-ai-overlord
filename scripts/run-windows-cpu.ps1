@@ -3,7 +3,8 @@ param(
     [int]$Episodes = 1,
     [int]$MaxSteps = 60,
     [string]$ModelPath = $env:LAYA_DOOM_MODEL,
-    [switch]$Headless
+    [switch]$Headless,
+    [switch]$HoldOpen
 )
 
 $ErrorActionPreference = 'Stop'
@@ -37,6 +38,9 @@ $RunArgs = @(
 )
 if ($Headless) {
     $RunArgs += '--headless'
+}
+if ($HoldOpen) {
+    $RunArgs += '--hold-open'
 }
 
 Write-Host "Starting Doom with Laya on CPU ($Scenario). Press Ctrl+C to stop."

@@ -29,9 +29,13 @@ The default opens the ViZDoom window. Add `-Headless` for a terminal-only run. O
 examples:
 
 ```powershell
-.\scripts\run-windows-cpu.ps1 -Scenario defend_the_center.cfg -MaxSteps 60
+.\scripts\run-windows-cpu.ps1 -Scenario basic.cfg -HoldOpen
+.\scripts\run-windows-cpu.ps1 -Scenario defend_the_center.cfg -MaxSteps 60 -HoldOpen
 .\scripts\run-windows-cpu.ps1 -Scenario deadly_corridor.cfg -MaxSteps 100
 ```
+
+`-HoldOpen` leaves the final game frame visible after the last episode. Press Enter in the
+PowerShell window when you are ready to close it.
 
 The launcher loads the already-downloaded English checkpoint by absolute local path, enables
 Hugging Face and Transformers offline mode, and disables CUDA. Override the checkpoint with
