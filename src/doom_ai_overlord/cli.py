@@ -109,10 +109,11 @@ def main():
 
             timed_out = game.is_episode_timeout_reached()
             reward = game.get_total_reward()
-            avg_lat = (total_inference_time / step * 1000) if step > 0 else 0
+            # episode_steps already reports each duration in milliseconds.
+            avg_lat = (total_inference_time / step) if step > 0 else 0
 
             print("-" * 60)
-            print(f"  EPISODE {ep} COMPLETE — {'survived to timeout' if timed_out else 'episode ended'}")
+            print(f"  EPISODE {ep} COMPLETE - {'survived to timeout' if timed_out else 'episode ended'}")
             print(f"  - Frags / Kills       : {ev['kills'] if ev else 0}")
             print(f"  - Total Reward        : {reward:.1f}")
             print(f"  - Decision Steps      : {step} ({game.get_episode_time()} tics)")

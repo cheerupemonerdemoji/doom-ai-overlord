@@ -52,6 +52,21 @@ uv sync
 
 The Laya model (~850 MB) downloads automatically from Hugging Face on first run.
 
+### Windows CPU / AMD GPU
+
+This fork includes a Windows CPU path that reuses an existing local Laya checkpoint and does
+not require the CUDA-pinned `uv` environment:
+
+```powershell
+py -3.12 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install --upgrade pip
+.\.venv\Scripts\python.exe -m pip install -e .
+.\scripts\run-windows-cpu.ps1 -Scenario basic.cfg
+```
+
+See [`docs/windows-cpu-and-reuse.md`](docs/windows-cpu-and-reuse.md) for the verified result,
+offline launcher options, and a guide to applying the same architecture in another project.
+
 ## Run
 
 ```bash
